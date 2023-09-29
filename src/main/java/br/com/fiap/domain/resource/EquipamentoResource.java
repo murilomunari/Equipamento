@@ -10,12 +10,31 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Path("/equipamento")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
 public class EquipamentoResource implements Resource<Equipamento, Long> {
+
+     private static final AtomicReference<EquipamentoResource> instance = new AtomicReference<>();
+
+    private EquipamentoResource() {
+    }
+
+    public static EquipamentoResource build() {
+        EquipamentoResource result = instance.get();
+        if (Objects.isNull( result )) {
+            EquipamentoResource repo = new EquipamentoResource();
+            if (instance.compareAndSet( null, repo )) {
+                result = repo;
+            } else {
+                result = instance.get();
+            }
+        }
+        return result;
+    }
 
 
     @Context
