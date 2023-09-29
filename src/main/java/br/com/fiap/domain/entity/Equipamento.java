@@ -18,13 +18,16 @@ public class Equipamento {
     private final String ETIQUETA = UUID.randomUUID().toString();
 
 
-    public Equipamento() {
+    public Equipamento(Long id, String nome, String descricao, Long etiqueta) {
     }
 
     public Equipamento(Long id, String nome, String descrição) {
         this.id = id;
         this.nome = nome;
         this.descrição = descrição;
+    }
+
+    public Equipamento(long idEquipamento, String nmEquipamento, String dsEquipamento, String nmEtiqueta) {
     }
 
     public Long getId() {
